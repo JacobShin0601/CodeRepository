@@ -11,7 +11,7 @@ with open('CodeRepository/Python/Algorithm/input.txt') as obj_file:
 # 1 2 2 2 2 1 5
 
 grid = [list(map(int, line.split())) for line in lines]
-
+ 
 def palindrome_check(lst):
     bool = True
     half_pnt = len(lst) // 2
