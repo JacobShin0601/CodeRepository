@@ -1,5 +1,4 @@
 import os
-from tempfile import tempdir
 with open('CodeRepository/Python/Algorithm/input.txt') as obj_file:
     lines = obj_file.readlines()
 
