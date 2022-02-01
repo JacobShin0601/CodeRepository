@@ -18,5 +18,23 @@ while(left_pnt < right_pnt):
 
     min_available = mid_pnt
 
-    cnt_dvd = 0
-    for item in lst_min_songs:
+    cnt_dvd = 1
+    temp_sum = 0
+    for min_song in lst_min_songs:
+        if temp_sum + min_song > min_available:
+            cnt_dvd += 1
+            temp_sum = min_song
+        elif temp_sum + min_song < min_available:
+            temp_sum += min_song
+    
+    if cnt_dvd <= num_dvd:
+        right_pnt = mid_pnt - 1
+        #print("Right:")
+        #print(right_pnt)
+    elif cnt_dvd > num_dvd:
+        left_pnt = mid_pnt + 1
+        #print("Left:")
+        #print(left_pnt)
+        
+
+print(mid_pnt)
