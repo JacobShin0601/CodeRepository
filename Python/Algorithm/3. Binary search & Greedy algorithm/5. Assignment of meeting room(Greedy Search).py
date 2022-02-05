@@ -16,12 +16,12 @@ lines.pop(0)
 
 lst_tuples = []
 
-for item in lines:
+for item in lines: 
     key, value = map(int, item.split())
     lst_tuples.append((key, value))
 
-# The earlier the meeting finished, the better for arranging meeting
-sorted_lst_tuples = sorted(lst_tuples, key=lambda x: x[1])
+# The earlier the meeting finished, the better for arranging meeting 
+sorted_lst_tuples = sorted(lst_tuples, key=lambda x: x[1]) 
 print(sorted_lst_tuples)
 
 # Applying Greedy Algorithm in terms of 'ending time of meeting'
