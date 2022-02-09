@@ -26,7 +26,7 @@ print(sorted_lst_tuples)
 
 # Applying Greedy Algorithm in terms of 'ending time of meeting'
 lst_result_greedy = []
-lst_result_greedy.append(sorted_lst_tuples[0])
+lst_result_greedy.append(sorted_lst_tuples[0]) 
 pnt = 0
 
 for i in range(1, len(sorted_lst_tuples)):
