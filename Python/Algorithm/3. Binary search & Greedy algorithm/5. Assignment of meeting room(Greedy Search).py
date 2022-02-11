@@ -1,7 +1,7 @@
 import os
 
 from numpy import left_shift
-with open('Python/Algorithm/input.txt') as obj_file:
+with open('CodeRepository/Python/Algorithm/input.txt') as obj_file:
     lines = obj_file.readlines()
 
 # 5
