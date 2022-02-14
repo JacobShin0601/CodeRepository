@@ -11,7 +11,7 @@ with open('CodeRepository/Python/Algorithm/input.txt') as obj_file:
 # 2 3
 # 4 6
 
-num_meeting = int(lines[0])
+num_meeting = int(lines[0])  
 lines.pop(0)
 
 lst_tuples = []
