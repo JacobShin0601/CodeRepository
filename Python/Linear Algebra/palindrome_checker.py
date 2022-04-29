@@ -22,6 +22,8 @@ def palindrome_checker(string):
 		cnt = cnt + 1
 	
 	return match_tag
+
+	#return multi_tagging ## is on the parameter
 		
 def result_printer(tag):
 	if(tag == True):
