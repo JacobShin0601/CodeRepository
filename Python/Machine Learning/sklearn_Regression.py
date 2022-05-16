@@ -6,7 +6,7 @@ from sklearn.metrics import mean_absolute_error
 from autosklearn.regression import AutoSklearnRegressor
 from autosklearn.metrics import mean_absolute_error as auto_mean_absolute_error
 # load dataset
-url = 'CodeRepository/Python/Machine Learning/auto-insurance.csv'
+url = 'Python/Machine Learning/auto-insurance.csv'
 dataframe = read_csv(url, header=None)
 # split into input and output elements
 data = dataframe.values
