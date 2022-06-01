@@ -3,7 +3,7 @@ import pandas as pd
 import scipy.stats as stats
 
 
-df = pd.read_csv('MIT class/Data Analysis: Statistical Modeling and Computation/week2/data_and_materials/gamma-ray.csv', ',', decimal='.')
+df = pd.read_csv('MIT_class/Data_Analysis/week2/data_and_materials/gamma-ray.csv', ',', decimal='.')
 df = df.round(4)
 pd.set_option('display.float_format', '{:.4f}'.format)
 
