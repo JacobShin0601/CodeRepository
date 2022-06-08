@@ -107,6 +107,7 @@ plot_toy_results('Pegasos', thetas_pegasos)
 
 # Your code here
 
+
 #-------------------------------------------------------------------------------
 # Assign to best_theta, the weights (and not the bias!) learned by your most
 # accurate algorithm with the optimal choice of hyperparameters.
