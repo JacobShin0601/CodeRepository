@@ -1,14 +1,15 @@
 import project1 as p1
 import utils
 import numpy as np
+import os
 
 #-------------------------------------------------------------------------------
 # Data loading. There is no need to edit code in this section.
 #-------------------------------------------------------------------------------
-
-train_data = utils.load_data('reviews_train.tsv')
-val_data = utils.load_data('reviews_val.tsv')
-test_data = utils.load_data('reviews_test.tsv')
+cwd = os.path.dirname(os.path.abspath(__file__))
+train_data = utils.load_data(cwd+'\\'+'reviews_train.tsv')
+val_data = utils.load_data(cwd+'\\'+'reviews_val.tsv')
+test_data = utils.load_data(cwd+'\\'+'reviews_test.tsv')
 
 train_texts, train_labels = zip(*((sample['text'], sample['sentiment']) for sample in train_data))
 val_texts, val_labels = zip(*((sample['text'], sample['sentiment']) for sample in val_data))
@@ -24,9 +25,9 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # Problem 5
 #-------------------------------------------------------------------------------
 
-toy_features, toy_labels = toy_data = utils.load_toy_data('toy_data.tsv')
+toy_features, toy_labels = toy_data = utils.load_toy_data(cwd+'\\'+'toy_data.tsv')
 
-T = 10
+T = 10000
 L = 0.2
 
 thetas_perceptron = p1.perceptron(toy_features, toy_labels, T)

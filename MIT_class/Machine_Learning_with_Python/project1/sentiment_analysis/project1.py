@@ -1,15 +1,17 @@
 from string import punctuation, digits
 import numpy as np
 import random
+import os
+
+cwd = os.path.dirname(os.path.abspath(__file__))
 
 # Part I
 
-
 def get_order(n_samples):
     try:
-        with open(str(n_samples) + '.txt') as fp:
-            line = fp.readline()
-            return list(map(int, line.split(',')))
+        with open(cwd + '\\' + str(n_samples) + '.txt') as fp:
+         line = fp.readline()
+         return list(map(int, line.split(',')))
     except FileNotFoundError:
         random.seed(1)
         indices = list(range(n_samples))
@@ -126,10 +128,16 @@ def perceptron(feature_matrix, labels, T):
     the feature matrix.
     """
     # Your code here
+    theta = np.zeros(feature_matrix.shape[1])
+    theta_0 = 0
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
-            # Your code here
+            feature_vector = feature_matrix[i]
+            label = labels[i]
+            theta, theta_0 = perceptron_single_step_update(feature_vector, label, theta, theta_0)
             pass
+    
+    return (theta, theta_0)
     raise NotImplementedError
 
 
@@ -163,6 +171,23 @@ def average_perceptron(feature_matrix, labels, T):
     find a sum and divide.
     """
     # Your code here
+    theta = np.zeros(feature_matrix.shape[1])
+    theta_0 = 0
+    theta_sum = np.zeros(feature_matrix.shape[1])
+    theta_0_sum = 0
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            feature_vector = feature_matrix[i]
+            label = labels[i]
+            theta, theta_0 = perceptron_single_step_update(feature_vector, label, theta, theta_0)
+            theta_sum += theta
+            theta_0_sum += theta_0
+            pass
+    theta_avg = theta_sum / (T*feature_matrix.shape[0])
+    theta_0_avg = theta_0_sum / (T*feature_matrix.shape[0])
+    return (theta_avg, theta_0_avg)
+
+    
     raise NotImplementedError
 
 
@@ -193,6 +218,17 @@ def pegasos_single_step_update(
     completed.
     """
     # Your code here
+    z = label * (np.dot(feature_vector, current_theta) + current_theta_0)
+    
+    if z <= 1:
+        theta = np.dot((1 - eta * L), current_theta) + eta * label * feature_vector
+        theta_0 = current_theta_0 + eta * label
+        return (theta, theta_0)
+    else:
+        theta = np.dot((1 - eta * L), current_theta)
+        theta_0 = current_theta_0
+        
+    return (theta, theta_0)
     raise NotImplementedError
 
 
@@ -226,6 +262,22 @@ def pegasos(feature_matrix, labels, T, L):
     parameter, found after T iterations through the feature matrix.
     """
     # Your code here
+    # Counter
+    c = 1
+    
+    current_theta = np.zeros(feature_matrix.shape[1])
+    current_theta_0 = 0.0
+    
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            eta_t = 1/np.sqrt(c)  # Update eta every iteration
+            c += 1 # Update counter
+            
+            # Run pegasos algorithm to get theta and theta0
+            current_theta, current_theta_0 = pegasos_single_step_update(feature_matrix[i,:], \
+             labels[i], L, eta_t, current_theta, current_theta_0)
+            
+    return (current_theta, current_theta_0)
     raise NotImplementedError
 
 # Part II
