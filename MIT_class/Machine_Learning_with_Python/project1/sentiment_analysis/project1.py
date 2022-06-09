@@ -3,20 +3,44 @@ import numpy as np
 import random
 import os
 
-cwd = os.path.dirname(os.path.abspath(__file__))
+cwd = os.path.dirname(os.path.realpath(__file__))
 
 # Part I
 
 def get_order(n_samples):
     try:
-        with open(cwd + '\\' + str(n_samples) + '.txt') as fp:
-         line = fp.readline()
-         return list(map(int, line.split(',')))
+        with open(cwd + '/' + str(n_samples) + '.txt') as fp:
+            line = fp.readline()
+            return list(map(int, line.split(',')))
     except FileNotFoundError:
         random.seed(1)
         indices = list(range(n_samples))
         random.shuffle(indices)
         return indices
+
+# def get_order(n):
+#     """
+#     Helper function that shuffles the order of a list of indices
+#     Args:
+#         n - an integer indicating the size of the list of indices
+#     Returns:
+#         a list of shuffled indices
+#     """
+#     # Your code here
+#     order = list(range(n))
+#     np.random.shuffle(order)
+#     return order
+
+# def get_order(n_samples):
+#     try:
+#         with open(str(n_samples) + '.txt') as fp:
+#             line = fp.readline()
+#             return list(map(int, line.split(',')))
+#     except FileNotFoundError:
+#         random.seed(1)
+#         indices = list(range(n_samples))
+#         random.shuffle(indices)
+#         return indices
 
 
 def hinge_loss_single(feature_vector, label, theta, theta_0):
@@ -94,11 +118,10 @@ def perceptron_single_step_update(
     completed.
     """
     # Your code here
-    z = np.dot(current_theta, feature_vector) + current_theta_0
-    if z * label <= 0:
-        current_theta += feature_vector * label
+    if label * (np.dot(current_theta, feature_vector) + current_theta_0) <= 0:
+        current_theta += label * feature_vector
         current_theta_0 += label
-    return current_theta, current_theta_0
+    return (current_theta, current_theta_0)
     raise NotImplementedError
 
 
@@ -132,11 +155,7 @@ def perceptron(feature_matrix, labels, T):
     theta_0 = 0
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
-            feature_vector = feature_matrix[i]
-            label = labels[i]
-            theta, theta_0 = perceptron_single_step_update(feature_vector, label, theta, theta_0)
-            pass
-    
+            theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
     return (theta, theta_0)
     raise NotImplementedError
 
@@ -275,7 +294,7 @@ def pegasos(feature_matrix, labels, T, L):
             
             # Run pegasos algorithm to get theta and theta0
             current_theta, current_theta_0 = pegasos_single_step_update(feature_matrix[i,:], \
-             labels[i], L, eta_t, current_theta, current_theta_0)
+                labels[i], L, eta_t, current_theta, current_theta_0)
             
     return (current_theta, current_theta_0)
     raise NotImplementedError
@@ -301,6 +320,8 @@ def classify(feature_matrix, theta, theta_0):
     be considered a positive classification.
     """
     # Your code here
+    predictions = np.dot(feature_matrix, theta) + theta_0
+    return np.sign(predictions)
     raise NotImplementedError
 
 
@@ -337,6 +358,12 @@ def classifier_accuracy(
     accuracy of the trained classifier on the validation data.
     """
     # Your code here
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_preds = classify(train_feature_matrix, theta, theta_0)
+    val_preds = classify(val_feature_matrix, theta, theta_0)
+    train_accuracy = accuracy(train_preds, train_labels)
+    val_accuracy = accuracy(val_preds, val_labels)
+    return (train_accuracy, val_accuracy)
     raise NotImplementedError
 
 

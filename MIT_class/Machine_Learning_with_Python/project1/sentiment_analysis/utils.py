@@ -110,7 +110,7 @@ def plot_toy_data(algo_name, features, labels, thetas):
     # show the plot
     algo_name = ' '.join((word.capitalize() for word in algo_name.split(' ')))
     plt.suptitle('Classified Toy Data ({})'.format(algo_name))
-    plt.show()
+    #plt.show()
 
 def plot_tune_results(algo_name, param_name, param_vals, acc_train, acc_val):
     """
@@ -129,7 +129,7 @@ def plot_tune_results(algo_name, param_name, param_vals, acc_train, acc_val):
     plt.legend(['train','val'], loc='upper right', title='Partition')
     plt.xlabel(param_name)
     plt.ylabel('Accuracy (%)')
-    plt.show()
+    #plt.show()
 
 def tune(train_fn, param_vals, train_feats, train_labels, val_feats, val_labels):
     train_accs = np.ndarray(len(param_vals))
