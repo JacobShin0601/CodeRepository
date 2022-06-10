@@ -51,53 +51,53 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # Problem 7
 #-------------------------------------------------------------------------------
 
-T = 10
-L = 0.01
+# T = 10
+# L = 0.01
 
-pct_train_accuracy, pct_val_accuracy = \
-   p1.classifier_accuracy(p1.perceptron, train_bow_features,val_bow_features,train_labels,val_labels,T=T)
-print("{:35} {:.4f}".format("Training accuracy for perceptron:", pct_train_accuracy))
-print("{:35} {:.4f}".format("Validation accuracy for perceptron:", pct_val_accuracy))
+# pct_train_accuracy, pct_val_accuracy = \
+#    p1.classifier_accuracy(p1.perceptron, train_bow_features,val_bow_features,train_labels,val_labels,T=T)
+# print("{:35} {:.4f}".format("Training accuracy for perceptron:", pct_train_accuracy))
+# print("{:35} {:.4f}".format("Validation accuracy for perceptron:", pct_val_accuracy))
 
-avg_pct_train_accuracy, avg_pct_val_accuracy = \
-   p1.classifier_accuracy(p1.average_perceptron, train_bow_features,val_bow_features,train_labels,val_labels,T=T)
-print("{:43} {:.4f}".format("Training accuracy for average perceptron:", avg_pct_train_accuracy))
-print("{:43} {:.4f}".format("Validation accuracy for average perceptron:", avg_pct_val_accuracy))
+# avg_pct_train_accuracy, avg_pct_val_accuracy = \
+#    p1.classifier_accuracy(p1.average_perceptron, train_bow_features,val_bow_features,train_labels,val_labels,T=T)
+# print("{:43} {:.4f}".format("Training accuracy for average perceptron:", avg_pct_train_accuracy))
+# print("{:43} {:.4f}".format("Validation accuracy for average perceptron:", avg_pct_val_accuracy))
 
-avg_peg_train_accuracy, avg_peg_val_accuracy = \
-   p1.classifier_accuracy(p1.pegasos, train_bow_features,val_bow_features,train_labels,val_labels,T=T,L=L)
-print("{:30} {:.4f}".format("Training accuracy for Pegasos:", avg_peg_train_accuracy))
-print("{:30} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accuracy))
+# avg_peg_train_accuracy, avg_peg_val_accuracy = \
+#    p1.classifier_accuracy(p1.pegasos, train_bow_features,val_bow_features,train_labels,val_labels,T=T,L=L)
+# print("{:30} {:.4f}".format("Training accuracy for Pegasos:", avg_peg_train_accuracy))
+# print("{:30} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accuracy))
 
 #-------------------------------------------------------------------------------
 # Problem 8
 #-------------------------------------------------------------------------------
 
 # data = (train_bow_features, train_labels, val_bow_features, val_labels)
-#
-# # values of T and lambda to try
+
+# #values of T and lambda to try
 # Ts = [1, 5, 10, 15, 25, 50]
 # Ls = [0.001, 0.01, 0.1, 1, 10]
-#
+
 # pct_tune_results = utils.tune_perceptron(Ts, *data)
 # print('perceptron valid:', list(zip(Ts, pct_tune_results[1])))
 # print('best = {:.4f}, T={:.4f}'.format(np.max(pct_tune_results[1]), Ts[np.argmax(pct_tune_results[1])]))
-#
+
 # avg_pct_tune_results = utils.tune_avg_perceptron(Ts, *data)
 # print('avg perceptron valid:', list(zip(Ts, avg_pct_tune_results[1])))
 # print('best = {:.4f}, T={:.4f}'.format(np.max(avg_pct_tune_results[1]), Ts[np.argmax(avg_pct_tune_results[1])]))
-#
+
 # # fix values for L and T while tuning Pegasos T and L, respective
 # fix_L = 0.01
 # peg_tune_results_T = utils.tune_pegasos_T(fix_L, Ts, *data)
 # print('Pegasos valid: tune T', list(zip(Ts, peg_tune_results_T[1])))
 # print('best = {:.4f}, T={:.4f}'.format(np.max(peg_tune_results_T[1]), Ts[np.argmax(peg_tune_results_T[1])]))
-#
+
 # fix_T = Ts[np.argmax(peg_tune_results_T[1])]
 # peg_tune_results_L = utils.tune_pegasos_L(fix_T, Ls, *data)
 # print('Pegasos valid: tune L', list(zip(Ls, peg_tune_results_L[1])))
 # print('best = {:.4f}, L={:.4f}'.format(np.max(peg_tune_results_L[1]), Ls[np.argmax(peg_tune_results_L[1])]))
-#
+
 # utils.plot_tune_results('Perceptron', 'T', Ts, *pct_tune_results)
 # utils.plot_tune_results('Avg Perceptron', 'T', Ts, *avg_pct_tune_results)
 # utils.plot_tune_results('Pegasos', 'T', Ts, *peg_tune_results_T)
@@ -111,6 +111,16 @@ print("{:30} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accu
 #-------------------------------------------------------------------------------
 
 # Your code here
+# Learn theta, theta0
+# theta, theta_0 = p1.pegasos(train_bow_features, train_labels, 25, 0.01)
+
+# # Use these parameters to get predictions on the test set
+# pred_test = p1.classify(test_bow_features, theta, theta_0)
+
+# # Calculate acuuracy on the test set
+# test_acc = p1.accuracy(pred_test, test_labels)
+
+# print("Accuracy on the test set: {:.4f}".format(test_acc))
 
 
 #-------------------------------------------------------------------------------
@@ -118,7 +128,7 @@ print("{:30} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accu
 # accurate algorithm with the optimal choice of hyperparameters.
 #-------------------------------------------------------------------------------
 
-# best_theta = None # Your code here
+# best_theta = theta
 # wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
 # sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
 # print("Most Explanatory Word Features")
