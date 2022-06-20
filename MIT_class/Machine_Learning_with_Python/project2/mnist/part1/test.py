@@ -159,6 +159,7 @@ def check_compute_probabilities():
         return
 
     theta = np.arange(0, k * d).reshape(k, d)
+    # print(theta)
     softmax.compute_probabilities(X, theta, temp)
     exp_res = np.zeros((k, n))
     exp_res[-1] = 1
