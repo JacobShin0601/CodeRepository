@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import linalg
 
 ### Functions for you to fill in ###
 
