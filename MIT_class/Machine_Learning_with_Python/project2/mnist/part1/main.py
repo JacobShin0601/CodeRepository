@@ -1,3 +1,4 @@
+from cgi import test
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -111,12 +112,19 @@ def run_softmax_on_MNIST(temp_parameter=1):
     theta, cost_function_history = softmax_regression(train_x, train_y, temp_parameter, alpha=0.3, lambda_factor=1.0e-4, k=10, num_iterations=150)
     plot_cost_function_over_time(cost_function_history)
     test_error = compute_test_error(test_x, test_y, theta, temp_parameter)
+    
     # Save the model parameters theta obtained from calling softmax_regression to disk.
     write_pickle_data(theta, "./theta.pkl.gz")
+    
+   ##  Update labels to label mod 3
+    train_y_mod3, test_y_mod3 = update_y(train_y, test_y)
+    
+    ## Compute test error with updated labels
+    test_error_mod3 = compute_test_error_mod3(test_x, test_y_mod3, theta, temp_parameter)
 
     # TODO: add your code here for the "Using the Current Model" question in tab 6.
     #      and print the test_error_mod3
-    return test_error
+    return (test_error, test_error_mod3)
 
 
 print('softmax test_error=', run_softmax_on_MNIST(temp_parameter=1))
