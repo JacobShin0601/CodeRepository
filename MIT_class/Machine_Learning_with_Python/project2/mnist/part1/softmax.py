@@ -69,6 +69,31 @@ def compute_cost_function(X, Y, theta, lambda_factor, temp_parameter):
         c - the cost value (scalar)
     """
     #YOUR CODE HERE
+    # Get number of labels
+    k = theta.shape[0]
+    
+    # Get number of examples
+    n = X.shape[0]
+    
+    # avg error term
+    
+    # Clip prob matrix to avoid NaN instances
+    clip_prob_matrix = np.clip(compute_probabilities(X, theta, temp_parameter), 1e-15, 1-1e-15)
+    #print(clip_prob_matrix)
+    
+    # Take the log of the matrix of probabilities
+    log_clip_matrix = np.log(clip_prob_matrix)
+    #print(Y)
+    # Create a sparse matrix of [[y(i) == j]]
+    Yi_j = sparse.coo_matrix(([1]*n, (Y, range(n))), shape = (k,n)).toarray()
+    
+    #print(M)
+    # Only add terms of log(matrix of prob) where M == 1
+    error_term = (-1/n)*np.sum(log_clip_matrix[Yi_j == 1])    
+                
+    # Regularization term
+    reg_term = (lambda_factor/2)*np.linalg.norm(theta)**2
+    return error_term + reg_term
     raise NotImplementedError
 
 def run_gradient_descent_iteration(X, Y, theta, alpha, lambda_factor, temp_parameter):
@@ -89,6 +114,27 @@ def run_gradient_descent_iteration(X, Y, theta, alpha, lambda_factor, temp_param
         theta - (k, d) NumPy array that is the final value of parameters theta
     """
     #YOUR CODE HERE
+    n = X.shape[0]
+    k = theta.shape[0]
+    d = theta.shape[1]
+    
+    Yi_m = sparse.coo_matrix(([1]*n, (Y, range(n))), shape = (k,n)).toarray()
+    Poss = compute_probabilities(X, theta, temp_parameter)
+    
+    inter1 = Yi_m - Poss
+    
+    # print(np.shape(X))
+    # print(np.shape(inter1))
+    
+    inter2 = inter1@X
+    error_terms_diff = (-1/(temp_parameter*n))*(inter2)
+    reg_terms_diff = lambda_factor * theta
+    
+    diff_term = error_terms_diff + reg_terms_diff
+    
+    theta = theta - alpha * diff_term
+    
+    return theta
     raise NotImplementedError
 
 def update_y(train_y, test_y):
