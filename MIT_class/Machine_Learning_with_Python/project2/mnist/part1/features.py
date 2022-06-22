@@ -39,6 +39,7 @@ def cubic_features(X):
     n, d = X.shape  # dataset size, input dimension
     X_withones = np.ones((n, d + 1))
     X_withones[:, :-1] = X
+    #print(X_withones)
     new_d = 0  # dimension of output
     new_d = int((d + 1) * (d + 2) * (d + 3) / 6)
 
@@ -54,11 +55,12 @@ def cubic_features(X):
             unique_2 = comb_2[np.triu_indices(d, 1)]
             unique_2 = unique_2.reshape(unique_2.size, 1)
             comb_3 = np.matmul(unique_2, X_i)
+            #print(comb_3)
             keep_m = np.zeros(comb_3.shape)
             index = 0
             for i in range(d - 1):
                 keep_m[index + np.arange(d - 1 - i), i] = 0
-
+                #print(keep_m)
                 tri_keep = np.triu_indices(d - 1 - i, 1)
 
                 correct_0 = tri_keep[0] + index
