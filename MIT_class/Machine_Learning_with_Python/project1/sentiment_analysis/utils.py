@@ -17,6 +17,9 @@ def load_toy_data(path_toy_data):
     labels is a length-N vector of +1/-1 labels.
     """
     labels, xs, ys = np.loadtxt(path_toy_data, delimiter='\t', unpack=True)
+    #print(xs.shape)
+    #print((np.vstack(xs, ys)).shape)
+    #print((np.vstack((xs, ys)).T).shape)
     return np.vstack((xs, ys)).T, labels
 
 def load_data(path_data, extras=False):
@@ -48,11 +51,13 @@ def load_data(path_data, extras=False):
     for datum in csv.DictReader(f_data, delimiter='\t'):
         for field in list(datum.keys()):
             if not extras and field not in basic_fields:
+                # print(datum[field])
                 del datum[field]
             elif field in numeric_fields and datum[field]:
                 datum[field] = int(datum[field])
 
         data.append(datum)
+        #print(datum)
 
     f_data.close()
 
@@ -164,4 +169,5 @@ def tune_pegasos_L(best_T, *args):
 
 def most_explanatory_word(theta, wordlist):
     """Returns the word associated with the bag-of-words feature having largest weight."""
+    #print([word for (theta_i, word) in sorted(zip(theta, wordlist))[::-1]])
     return [word for (theta_i, word) in sorted(zip(theta, wordlist))[::-1]]
