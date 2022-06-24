@@ -68,8 +68,13 @@ def get_MNIST_data():
     train_x, train_y = train_set
     valid_x, valid_y = valid_set
     train_x = np.vstack((train_x, valid_x))
-    # print(train_x)
+    # print(train_x.shape)
+    # print(valid_x.shape)
+    print(train_y.shape)
+    print(valid_y.shape)
     train_y = np.append(train_y, valid_y)
+    print(train_y.shape)
+    # print(valid_y.shape)
     test_x, test_y = test_set
     # print(test_x, test_y)
     return train_x, train_y, test_x, test_y

@@ -47,7 +47,7 @@ def run_linear_regression_on_MNIST(lambda_factor=1):
 
 
 # Don't run this until the relevant functions in linear_regression.py have been fully implemented.
-print('Linear Regression test_error =', run_linear_regression_on_MNIST(lambda_factor=0.01))
+# print('Linear Regression test_error =', run_linear_regression_on_MNIST(lambda_factor=0.01))
 
 
 #######################################################################
@@ -71,7 +71,7 @@ def run_svm_one_vs_rest_on_MNIST():
     return test_error
 
 
-print('SVM one vs. rest test_error:', run_svm_one_vs_rest_on_MNIST())
+# print('SVM one vs. rest test_error:', run_svm_one_vs_rest_on_MNIST())
 
 
 def run_multiclass_svm_on_MNIST():
@@ -87,7 +87,7 @@ def run_multiclass_svm_on_MNIST():
     return test_error
 
 
-print('Multiclass SVM test_error:', run_multiclass_svm_on_MNIST())
+# print('Multiclass SVM test_error:', run_multiclass_svm_on_MNIST())
 
 #######################################################################
 # 4. Multinomial (Softmax) Regression and Gradient Descent
@@ -165,7 +165,7 @@ def run_softmax_on_MNIST_mod3(temp_parameter=1):
 
 
 # TODO: Run run_softmax_on_MNIST_mod3(), report the error rate
-print('softmax test_error_mod3=', run_softmax_on_MNIST_mod3(temp_parameter=1.0))
+# print('softmax test_error_mod3=', run_softmax_on_MNIST_mod3(temp_parameter=1.0))
 
 #######################################################################
 # 7. Classification Using Manually Crafted Features
@@ -192,7 +192,7 @@ def run_softmax_on_MNIST_pca(temp_parameter=1.):
 
     return test_error
 
-print('softmax test_error_PCA=', run_softmax_on_MNIST_pca(temp_parameter=1))
+# print('softmax test_error_PCA=', run_softmax_on_MNIST_pca(temp_parameter=1))
 
 # TODO: Train your softmax regression model using (train_pca, train_y)
 #       and evaluate its accuracy on (test_pca, test_y).
@@ -201,7 +201,7 @@ print('softmax test_error_PCA=', run_softmax_on_MNIST_pca(temp_parameter=1))
 # TODO: Use the plot_PC function in features.py to produce scatterplot
 #       of the first 100 MNIST images, as represented in the space spanned by the
 #       first 2 principal components found above.
-plot_PC(train_x[range(000, 100), ], pcs, train_y[range(000, 100)], feature_means)#feature_means added since release
+# plot_PC(train_x[range(000, 100), ], pcs, train_y[range(000, 100)], feature_means)#feature_means added since release
 
 
 # TODO: Use the reconstruct_PC function in features.py to show
@@ -242,7 +242,7 @@ def run_softmax_on_MNIST_pca10_cube(temp_parameter=1.):
 
     return test_error
 
-print('softmax test_error_PCA10_cube=', run_softmax_on_MNIST_pca10_cube(temp_parameter=1))
+# print('softmax test_error_PCA10_cube=', run_softmax_on_MNIST_pca10_cube(temp_parameter=1))
 
 
 def run_polySVM_on_MNIST_pca10_cube(temp_parameter=1.):
@@ -260,7 +260,7 @@ def run_polySVM_on_MNIST_pca10_cube(temp_parameter=1.):
 
     return test_error
 
-print('polySVM test_error_PCA10_cube=', run_polySVM_on_MNIST_pca10_cube(temp_parameter=1))
+# print('polySVM test_error_PCA10_cube=', run_polySVM_on_MNIST_pca10_cube(temp_parameter=1))
 
 
 def run_rbfSVM_on_MNIST_pca10_cube(temp_parameter=1.):
@@ -278,4 +278,4 @@ def run_rbfSVM_on_MNIST_pca10_cube(temp_parameter=1.):
 
     return test_error
 
-print('rbfSVM test_error_PCA10_cube=', run_rbfSVM_on_MNIST_pca10_cube(temp_parameter=1))
+# print('rbfSVM test_error_PCA10_cube=', run_rbfSVM_on_MNIST_pca10_cube(temp_parameter=1))
