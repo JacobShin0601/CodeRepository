@@ -376,6 +376,7 @@ def extract_words(input_string):
     """
     for c in punctuation + digits:
         input_string = input_string.replace(c, ' ' + c + ' ')
+        #print(input_string)
 
     return input_string.lower().split()
 
@@ -413,6 +414,7 @@ def bag_of_words(texts):
         for word in word_list:
             if word not in dictionary and word not in stop_words:
                 dictionary[word] = len(dictionary)
+    # print(dictionary)
     return dictionary
 
 

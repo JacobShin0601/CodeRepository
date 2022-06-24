@@ -60,7 +60,7 @@ def cubic_features(X):
             index = 0
             for i in range(d - 1):
                 keep_m[index + np.arange(d - 1 - i), i] = 0
-                #print(keep_m)
+                #print(keep_m[index + np.arange(d - 1 - i), i])
                 tri_keep = np.triu_indices(d - 1 - i, 1)
 
                 correct_0 = tri_keep[0] + index
