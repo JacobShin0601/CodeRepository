@@ -39,7 +39,7 @@ def cubic_features(X):
     n, d = X.shape  # dataset size, input dimension
     X_withones = np.ones((n, d + 1))
     X_withones[:, :-1] = X
-    #print(X_withones)
+    print(X_withones)
     new_d = 0  # dimension of output
     new_d = int((d + 1) * (d + 2) * (d + 3) / 6)
 
@@ -47,6 +47,7 @@ def cubic_features(X):
     col_index = 0
     for x_i in range(n):
         X_i = X[x_i]
+        #print(X_i.size)
         X_i = X_i.reshape(1, X_i.size)
 
         if d > 2:
