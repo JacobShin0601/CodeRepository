@@ -1,4 +1,10 @@
 import gzip, _pickle, numpy as np
+import os
+
+# print(os.path.dirname(os.path.abspath(__file__)))
+win_temp_dir = 'MIT_class/Machine_Learning_with_Python/project2/mnist/Datasets'
+
+
 num_classes = 10
 img_rows, img_cols = 42, 28
 
@@ -21,4 +27,5 @@ def get_data(path_to_data_dir, use_mini_dataset):
 	f = gzip.open(path_to_data_dir +'test_labels' + exten + '.txt.gz', 'rb')
 	y_test = np.loadtxt(f)
 	f.close()
+ 
 	return X_train, y_train, X_test, y_test
